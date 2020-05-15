@@ -1,7 +1,7 @@
 #pragma once
 #undef UTF8_WINAPI
 #define UTF8_WINAPI
-#include "windows-h.hpp"
+#include <winapi-header-wrappers/windows-h.hpp>
 
 namespace uuid_0985060C_1AAD_453C_B3F9_A2E543F4CF1E {
     struct Winapi_envelope
