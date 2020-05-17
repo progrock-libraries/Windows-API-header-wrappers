@@ -17,7 +17,15 @@
 
 // UTF8_WINAPI is a custom macro for this file. UNICODE, _UNICODE and _MBCS are MS macros.
 #if defined( UTF8_WINAPI ) and defined( UNICODE )
-#   error "Inconsistent encoding options, both UNICODE (UTF-16) and UTF8_WINAPI (UTF-8)."
+#   error "Inconsistent, both UNICODE (UTF-16) and UTF8_WINAPI (UTF-8) are defined."
+#endif
+
+#if defined( _MBCS ) and defined( UNICODE )
+#   error "Inconsistent, both UNICODE (UTF-16) and _MBCS (Windows multibyte) are defined."
+#endif
+
+#if not( defined( UTF8_WINAPI ) or defined( UNICODE ) )
+#   error "Define either UTF8_WINAPI or UNICODE, for respectively UTF-8 and UTF-16."
 #endif
 
 #undef UNICODE
