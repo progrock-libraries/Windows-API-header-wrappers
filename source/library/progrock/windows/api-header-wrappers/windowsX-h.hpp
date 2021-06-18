@@ -1,5 +1,5 @@
 #pragma once
-#include <winapi-header-wrappers/windows-h.hpp>
+#include <progrock/windows-api-header-wrappers/windows-h.hpp>
 #include <windowsx.h>
 
 // HANDLE_WM_NOTIFY is defined by <commctrl.h>.
