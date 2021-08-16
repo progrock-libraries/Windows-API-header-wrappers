@@ -7,21 +7,24 @@
 #endif
 
 #include <assert.h>
-#ifdef _MSC_VER         // TODO: Check version.
+#ifdef _MSC_VER                         // TODO: Check version.
 #   include <iso646.h>                  // Standard `and` etc. also with MSVC.
 #endif
 
 // UTF8_WINAPI is a custom macro for this file. UNICODE, _UNICODE and _MBCS are MS macros.
 #if defined( UTF8_WINAPI ) and defined( UNICODE )
 #   error "Inconsistent, both UNICODE (UTF-16) and UTF8_WINAPI (UTF-8) are defined."
+#   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
 #if defined( _MBCS ) and defined( UNICODE )
 #   error "Inconsistent, both UNICODE (UTF-16) and _MBCS (Windows multibyte) are defined."
+#   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
 #if not( defined( UTF8_WINAPI ) or defined( UNICODE ) )
 #   error "Define either UTF8_WINAPI or UNICODE, for respectively UTF-8 and UTF-16."
+#   include <stop-compilation>      // For e.g. the g++ compiler.
 #endif
 
 #undef UNICODE
@@ -98,12 +101,12 @@
 /////////////////////////////////////////////////////////////////////
 
 // Use like `static_assert( IS_NARROW_WINAPI() )`.
-#define IS_NARROW_WINAPI() \
-    ("Define UTF8_WINAPI please.", sizeof(*GetCommandLine()) == 1)
+#define IS_NARROW_WINAPI()      (sizeof(*GetCommandLine()) == 1)
+#define IS_NARROW_WINAPI_TEXT() "Define (only) UTF8_WINAPI please."
 
 // Use like `static_assert( IS_WIDE_WINAPI() )`.
-#define IS_WIDE_WINAPI() \
-    ("Define UNICODE please.", sizeof(*GetCommandLine()) > 1)
+#define IS_WIDE_WINAPI()        (sizeof(*GetCommandLine()) > 1)
+#define IS_WIDE_WINAPI_TEXT()   "Define (only) UNICODE please."
 
 inline auto winapi_h_assert_utf8_codepage()
     -> bool
