@@ -47,7 +47,7 @@
 #define WIN32_LEAN_AND_MEAN
 #undef NOCOMM           // No serial comms API please.
 #define NOCOMM
-#define NOMCX           // No modem configuration API please.
+#undef NOMCX            // No modem configuration API please.
 #define NOMCX
 #undef NOOPENFILE       // No OpenFile function please; it's limited and long deprecated.
 #define NOOPENFILE
